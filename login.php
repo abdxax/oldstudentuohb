@@ -1,0 +1,104 @@
+<?php
+session_start();
+require "page/connect/func.php";
+if (isset($_POST['sub'])) {
+  # code...
+  $email=strip_tags($_POST['email']);
+  $pass=strip_tags($_POST['pass']);
+  $db=new opreter();
+  $db->login($email,$pass);
+}
+?>
+
+<!DOCTYPE html>
+<html >
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link href="https://fonts.googleapis.com/css?family=Amiri|Cairo|Changa|Markazi+Text|Noto+Sans|Open+Sans|PT+Sans|Roboto|Scheherazade|Source+Serif+Pro" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" id="style" href="css/style.css">
+     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+     <script type="text/javascript" src="js/login.js"></script>
+	<title></title>
+	
+	
+</head>
+<body>
+<section>
+	<div class="row">
+		<div class="col-lg-7 col-md-6 back hidden-md-down hidden-phone">
+			
+		</div>
+
+		<div class="col-lg-5 col-md-6 vx col-sm-12" id="dire">
+			
+			<div class="col-lg-8 col-md-12 formx col-sm-9">
+				<div class="logo">
+				<img src="logo .png">
+			</div>
+               <div class="card ">
+               	<div class="card-body">
+               		<div class="card-title"><h5 id="title">Student Information System</h5> </div>
+               		<div class="col-12">
+               			<form method="POST">
+               				<div class="form-group">
+               					<div class="col-12">
+               						<input type="email" name="email" class="form-control" placeholder="User ID " id="user">
+               					</div>
+               				</div>
+               				<div class="form-group">
+               					<div class="col-12">
+               						<input type="Password" name="pass" class="form-control" placeholder="Password " id="pass">
+               					</div>
+               				</div>
+               				<div class="form-check">
+               					<div class="col-6">
+               						 <input type="checkbox" name="" class="form-check-input" id='chk' >
+               						 <label for="chk" id="rmber" > Remaber </label>
+               					</div>
+               				</div>
+               				<div class="form-group">
+               					<div class="col-6">
+               						 <input type="submit" name="sub" class="btn btn-info btn-block" value="Login" id="but">
+               						 
+               					</div>
+               				</div>
+
+               			</form>
+               			
+               		</div>
+               	</div>
+               </div>
+            
+              <div class="lan">
+                    <a href="#eng" id="ar" ata-reload>عربي</a>
+                 <a href="#ar" id="eng" data-reload">English </a>
+              </div>
+			 </div>
+
+			 <footer>
+			             <p>@copyright 2018-2019 Abdulrahman Jarallah </p>
+
+			 </footer>
+		</div>
+	</div>
+</section>
+<!-- loading -->
+<section class="loading">
+      <div class="loga">
+          <img src="loading.jpg"> 
+      </div>
+      <div class="spinner">
+  <div class="bounce1"></div>
+  <div class="bounce2"></div>
+  <div class="bounce3"></div>
+</div>
+     
+
+</section>
+
+
+<!-- loading end -->
+</body>
+</html>
