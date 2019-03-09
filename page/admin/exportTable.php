@@ -33,7 +33,21 @@ $db=new opreter();
 				</thead>
 				<tbody>
 					<?php
-					
+					$res=$db->getColloges();
+					foreach ($res as $key ) {
+						# code...
+						echo '
+						<tr>
+						<td>'.$key['name_col'].'</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td><a href="../../vendor/exc.php?id='.$key['id_col'].'">Down</a></td>
+
+						</tr>
+
+						';
+					}
 
 					?>
 				</tbody>
