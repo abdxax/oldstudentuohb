@@ -285,11 +285,12 @@ public function getmajer($id){
 
     //get all the collog with majer 
     public function getDataColloge($id){
-        $sql=$this->pdo->prepare("SELECT * FROM college LEFT JOIN majer ON college.id_col=majer.id_col
-LEFT JOIN student ON college.id_col=student.id_col
-LEFT JOIN date_term ON student.id_gov=date_term.id_stu
-LEFT JOIN mark ON date_term.id_det=mark.id_da
-LEFT JOIN subject ON mark.id_sub=subject.id_sub
+       $sql=$this->pdo->prepare("SELECT * FROM student JOIN date_term ON student.id_gov=date_term.id_stu
+JOIN college ON college.id_col=student.id_col
+JOIN majer ON student.id_maj=majer.id_m
+JOIN mark ON date_term.id_det=mark.id_da AND mark.id_gov=student.id_gov
+JOIN subject ON mark.id_sub=subject.id_sub
+JOIN term ON term.id_trm=date_term.id_ter
 WHERE college.id_col=?");
         $sql->execute(array($id));
         return $sql;

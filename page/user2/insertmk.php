@@ -254,7 +254,13 @@ if(isset($_POST['sub8'])){
         echo '</div>
         </div>
         <div class="col-8">
-          <table class="table">';
+          <table class="table">
+          <thead>
+            <th>الماده </th>
+             <th> الدرجه </th>
+              <th>الساعات </th>
+            </thead>
+          ';
           $subj=$db->getSubjectm($_SESSION["mjr"],$key['id_trm']);
 
            $cont=1;
@@ -263,7 +269,8 @@ if(isset($_POST['sub8'])){
            $sujs=$db->getMark ($value['id_sub'],$id_student);
             echo '
 
-            <table >
+          
+            
 
             <tr>
               <th>'.$value['sub_name'].'</th>
@@ -273,7 +280,7 @@ if(isset($_POST['sub8'])){
 
             </tr>
 
-            </table>
+            
 
             ';
             $cont++;
@@ -283,7 +290,7 @@ if(isset($_POST['sub8'])){
         </div>
 
        
-          <input type="submit" class="btn btn-info" name="sub'.$key['id_trm'].'">
+         
         </form>
       </div>
     </div>
@@ -310,7 +317,7 @@ if(isset($_POST['sub8'])){
         <form method="POST">
         <div class="form-group">
         <div class="col-4">
-          <input type="text" name="semday'.$key['id_trm'].'" class="form-control" >
+          <input type="text" name="semday'.$key['id_trm'].'" class="form-control" placeholder="الفصل الدراسي ">
         </div>
         </div>
         <div class="col-8">
@@ -327,8 +334,8 @@ if(isset($_POST['sub8'])){
             <tr>
               <th>'.$value['sub_name'].'</th>
 
-             <td> <input type="text" name="sum'.$key['id_trm'].''.$cont.'"></td>
-             <td><input type="text" name="sub'.$key['id_trm'].''.$cont.'" value="'.$value['id_sub'].'"></td>
+             <td> <input type="text" name="sum'.$key['id_trm'].''.$cont.'" class="form-control"></td >
+             <td><input type="hidden" name="sub'.$key['id_trm'].''.$cont.'" value="'.$value['id_sub'].'"></td>
 
             </tr>
 
@@ -342,7 +349,7 @@ if(isset($_POST['sub8'])){
         </div>
 
        
-          <input type="submit" class="btn btn-info" name="sub'.$key['id_trm'].'">
+          <input type="submit" class="btn btn-info" name="sub'.$key['id_trm'].'" value="حفظ">
         </form>
       </div>
     </div>
