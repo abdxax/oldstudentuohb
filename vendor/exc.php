@@ -7,6 +7,7 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 $id_col=$_GET['id'];
 $db=new opreter();
+$db->checkRole($_SESSION['email'],$_SESSION['pass'],1) ;
 $sq=$db-> getDataColloge($id_col);
 $spreadsheet = new Spreadsheet();
 $sheet = $spreadsheet->getActiveSheet();

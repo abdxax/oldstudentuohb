@@ -2,6 +2,7 @@
 session_start();
 require "../connect/func.php";
 $db=new opreter();
+$db->checkRole($_SESSION['email'],$_SESSION['pass'],3) ;
 ?>
 <!DOCTYPE html >
 <html dir="rtl">

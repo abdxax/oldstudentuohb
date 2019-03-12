@@ -3,6 +3,7 @@ session_start();
 require "../connect/func.php";
 
 $db=new opreter();
+$db->checkRole($_SESSION['email'],$_SESSION['pass'],1) ;
 if (isset($_POST['sub'])) {
   $name=$_POST['name'];
   $email=$_POST['email'];
@@ -10,7 +11,15 @@ if (isset($_POST['sub'])) {
   $pass2=$_POST['password2'];
   $role=$_POST['role'];
 	if ($pass==$pass) {
-    $db->addUser($name,$email,$pass,$role,"5");
+    if (strlen($pass)>=6&&strlen($pass)<=10) {
+      # code...
+      $pass=md5("uhb".$pass2);
+       $db->addUser($name,$email,$pass,$role,"5");
+    }
+    else{
+      header("location:user.php?msg=errpass");
+    }
+   
   }
 }
 ?>
@@ -45,6 +54,19 @@ if (isset($_POST['sub'])) {
 <section>
 	<div class="container">
 		<div class="row">
+      <div class="col-12">
+        <?php
+        if (isset($_GET['msg'])) {
+          # code...
+          if ($_GET['msg']=='errpass') {
+            # code...
+            echo'<div class="laert alert-danger text-center">كلمه المرور تجب تكون بين 6 الى 10 خانات </div>';
+
+          }
+        }
+
+        ?>
+      </div>
 			<div class="col-8 offset-2">
 				<table class="table">
 					<thead>
@@ -115,9 +137,9 @@ if (isset($_POST['sub'])) {
            <div class="form-group">
             <label for="recipient-name" class="col-form-label">الصلاحيه </label>
             <select name="role">
-            	<option value="1">راصد</option>
-              <option value="2">مراجع </option>
-              <option value="3">مستعلم</option>
+            	<option value="3">راصد</option>
+              <option value="">مراجع </option>
+              <option value="4">مستعلم</option>
              
             </select>
           </div>

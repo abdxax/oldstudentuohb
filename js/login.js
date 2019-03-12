@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	// body...
   var hie=window.innerHeight;
+  
   //window.innerHeight;
  /*if(hie<=812){
    $(".back").css('height',0);

@@ -39,28 +39,28 @@ if (isset($_POST['sub'])) {
 			</div>
                <div class="card ">
                	<div class="card-body">
-               		<div class="card-title"><h5 id="title">Student Information System</h5> </div>
+               		<div class="card-title"><h5 id="title">نظام السجلات الطالبات القديم </h5> </div>
                		<div class="col-12">
                			<form method="POST">
                				<div class="form-group">
                					<div class="col-12">
-               						<input type="email" name="email" class="form-control" placeholder="User ID " id="user">
+               						<input type="email" name="email" class="form-control" placeholder="اسم المستخدم  " id="user" >
                					</div>
                				</div>
                				<div class="form-group">
                					<div class="col-12">
-               						<input type="Password" name="pass" class="form-control" placeholder="Password " id="pass">
+               						<input type="Password" name="pass" class="form-control" placeholder="الرقم السري  " id="pass">
                					</div>
                				</div>
                				<div class="form-check">
                					<div class="col-6">
                						 <input type="checkbox" name="" class="form-check-input" id='chk' >
-               						 <label for="chk" id="rmber" > Remaber </label>
+               						 <label for="chk" id="rmber" > تذكرني  </label>
                					</div>
                				</div>
                				<div class="form-group">
                					<div class="col-6">
-               						 <input type="submit" name="sub" class="btn btn-info btn-block" value="Login" id="but">
+               						 <input type="submit" name="sub" class="btn btn-info btn-block" value="تسجيل دخول " id="but">
                						 
                					</div>
                				</div>
@@ -71,10 +71,7 @@ if (isset($_POST['sub'])) {
                	</div>
                </div>
             
-              <div class="lan">
-                    <a href="#eng" id="ar" ata-reload>عربي</a>
-                 <a href="#ar" id="eng" data-reload">English </a>
-              </div>
+             
 			 </div>
 
 			 <footer>

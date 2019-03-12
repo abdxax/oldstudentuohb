@@ -3,6 +3,7 @@ session_start();
 require "../connect/func.php";
 $id_mjr="";
 $db=new opreter();
+$db->checkRole($_SESSION['email'],$_SESSION['pass'],1) ;
 if (isset($_GET['id_col'])) {
 	$id_mjr=$_GET['id_col'];
 }

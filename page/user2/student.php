@@ -3,6 +3,8 @@ session_start();
 require "../connect/func.php";
 
 $db=new opreter();
+$db->checkRole($_SESSION['email'],$_SESSION['pass'],3) ;
+
 if (isset($_POST['sub'])) {
 	$mname=strip_tags($_POST['majer']);
 	$db->addMajer($_SESSION['id_co'],$mname);

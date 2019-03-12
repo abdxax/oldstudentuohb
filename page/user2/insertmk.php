@@ -2,6 +2,8 @@
 session_start();
 require "../connect/func.php";
 $db=new opreter();
+$db->checkRole($_SESSION['email'],$_SESSION['pass'],3) ;
+
 $trm=$db->getallsTeram();
 $id_student=$_GET['id'];
 $infotrn=$db->getInfo($id_student);

@@ -15,7 +15,29 @@ class opreter extends DB{
                 if ($key['role']==1){
                     $_SESSION['email']=$user;
                     $_SESSION['pass']=$pass;
+                    $_SESSION['roles']=$key['role'];
+                    header("location:page/admin/index.php");
+                }
+                else if($key['role']==2){
+                    $_SESSION['email']=$user;
+                    $_SESSION['pass']=$pass;
+                    $_SESSION['roles']=$key['role'];
                     header("location:page/user/index.php");
+                }
+                 else if($key['role']==3){
+                    $_SESSION['email']=$user;
+                    $_SESSION['pass']=$pass;
+                    $_SESSION['roles']=$key['role'];
+                    header("location:page/user2/index.php");
+                }
+                 else if($key['role']==4){
+                    $_SESSION['email']=$user;
+                    $_SESSION['pass']=$pass;
+                    $_SESSION['roles']=$key['role'];
+                    header("location:page/query/index.php");
+                }
+                else{
+                    header("location:login.php?msg=err");
                 }
             }
         }
@@ -296,6 +318,23 @@ WHERE college.id_col=?");
         return $sql;
     }
 
+    //Check the role 
+    public function checkRole($email,$pass,$role){
+        $sql=$this->pdo->prepare("SELECT * FROM user WHERE email=? AND password=? AND role=?");
+        $sql->execute(array($email,$pass,$role));
+        $role_db="";
+        foreach ($sql as $key) {
+            # code...
+            $role_db=$key['role'];
+        }
+        if ($sql->rowCount()==1 AND $role_db==$role) {
+            # code...
+        }
+        else{
+            header("location:../../login.php");
+        }
+
+    }
 
 
 }

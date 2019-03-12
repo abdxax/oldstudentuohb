@@ -3,6 +3,8 @@ session_start();
 require "../connect/func.php";
 echo $_SESSION['id_co'];
 $db=new opreter();
+$db->checkRole($_SESSION['email'],$_SESSION['pass'], 2) ;
+
 if (isset($_POST['sub'])) {
 	$name=strip_tags($_POST['majer']);
 	$idgov=strip_tags($_POST['idgov']);

@@ -2,7 +2,10 @@
 session_start();
 require "../connect/func.php";
 $db=new opreter();
-echo $_SESSION['email'];
+$db->checkRole($_SESSION['email'],$_SESSION['pass'],3) ;
+	# code...
+
+
 $info=$db->getInfoEmployee($_SESSION['email']);
 ?>
 <!DOCTYPE html>
@@ -78,7 +81,7 @@ $info=$db->getInfoEmployee($_SESSION['email']);
 
 			<div class="col-4">
 				<div class="card">
-					<a href="#">
+					<a href="logout.php">
 						<div class="text-center">
 							<i class="fas fa-sign-out-alt"></i>
 						</div>
