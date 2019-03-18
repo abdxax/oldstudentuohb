@@ -45,9 +45,9 @@ $info=$db->getInfoEmployee($_SESSION['email']);
 				if (isset($_GET['err'])) {
 					# code...
 					if($_GET['err']=="notfound")
-					echo '<div class="alert alert-dinger text-center">لا يوجة بيانات بالرقم الجلوس المدخل </div>';
+					echo '<div class="alert alert-danger text-center">لا يوجة بيانات بالرقم الجلوس المدخل </div>';
 				else
-					echo '<div class="alert alert-dinger text-center">لا يوجد بيانات تحمل الاسم  المدخل </div>';
+					echo '<div class="alert alert-danger text-center">لا يوجد بيانات تحمل الاسم  المدخل </div>';
 				}
 
 				?>

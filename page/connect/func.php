@@ -305,6 +305,18 @@ public function getmajer($id){
         return $sql;
     }
 
+    //search by ID 
+     public function searchByID($id){
+        $sql=$this->pdo->prepare("SELECT * FROM student LEFT JOIN college ON student.id_col=college.id_col 
+                                                        LEFT JOIN majer ON student.id_maj=majer.id_m
+                                            Where student.id_gov = ?
+                                                        ");
+
+        $sql->execute(array($id));
+        return $sql;
+    }
+
+
     //get all the collog with majer 
     public function getDataColloge($id){
        $sql=$this->pdo->prepare("SELECT * FROM student JOIN date_term ON student.id_gov=date_term.id_stu

@@ -69,11 +69,54 @@ $db->checkRole($_SESSION['email'],$_SESSION['pass'],3) ;
 
               		}
               	}
-              }
+              
 
               else if ($choname=="id") {
+               
+                  $res=$db->searchByID($inp);
+                  
+                  if($res->rowCount()>0){
+                    echo '
+                    <div >
+                    <table class="table">
+                    <tr>
+                    <th>الاسم</th>
+                    <th>رقم الجلوس</th>
+                    <th>الكليه</th>
+                    <th>التخصص</th>
+                    <th></th>
+
+                    </tr>';
+                    foreach ($res as $key ) {
+                      # code...
+                      echo '
+                      <tr>
+                      <td><a href=insertmk.php?id='.$key['id_gov'].'>'.$key['name'].'</a></td>
+                      <td>'.$key['id_gov'].'</td>
+                      <td>'.$key['name_col'].'</td>
+                      <td>'.$key['majer_name'].'</td>
+                      <td></td>
+
+
+
+                      </tr>
+
+                      ';
+                    }
+
+                    echo '</table>
+                    </div>
+
+                    ';
+                  }
+                  else{
+                      header("location:index.php?err=notfound2");
+
+                  }
+                
               	
               }
+            }
 
 			?>
 		</div>
