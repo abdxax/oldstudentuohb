@@ -36,7 +36,7 @@ $(document).ready(function(){
 });
 
 // for loading 
-$(window).one("load",function(){
+/*$(window).one("load",function(){
 
 $(".loading").fadeOut(5000);
-});
+});*/

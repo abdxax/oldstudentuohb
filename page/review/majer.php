@@ -1,26 +1,13 @@
 <?php
 session_start();
 require "../connect/func.php";
-
+//echo $_SESSION['id_co'];
 $db=new opreter();
-$db->checkRole($_SESSION['email'],$_SESSION['pass'],1) ;
+$db->checkRole($_SESSION['email'],$_SESSION['pass'],5) ;
+
 if (isset($_POST['sub'])) {
-  $name=$_POST['name'];
-  $email=$_POST['email'];
-  $pass=$_POST['password'];
-  $pass2=$_POST['password2'];
-  $role=$_POST['role'];
-	if ($pass==$pass) {
-    if (strlen($pass)>=6&&strlen($pass)<=10) {
-      # code...
-      $pass=md5("uhb".$pass2);
-       $db->addUser($name,$email,$pass,$role,"5");
-    }
-    else{
-      header("location:user.php?msg=errpass");
-    }
-   
-  }
+	$mname=strip_tags($_POST['majer']);
+	$db->addMajer($_SESSION['id_co'],$mname);
 }
 ?>
 <!DOCTYPE html>
@@ -43,8 +30,8 @@ if (isset($_POST['sub'])) {
 <header>
 	<div class="col-8 offset-2">
 		<div class="col-4">
-			<a href="#" class="btn btn-info " data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">اضافه مستخدم</a>
-			<a href="index.php" class="btn btn-info ">الصفحه الرئيسه </a>
+			
+			<a href="colloge.php" class="btn btn-info ">الصفحه الرئيسه </a>
 		</div>
 		<div class="col-4">
 			
@@ -54,37 +41,23 @@ if (isset($_POST['sub'])) {
 <section>
 	<div class="container">
 		<div class="row">
-      <div class="col-12">
-        <?php
-        if (isset($_GET['msg'])) {
-          # code...
-          if ($_GET['msg']=='errpass') {
-            # code...
-            echo'<div class="laert alert-danger text-center">كلمه المرور تجب تكون بين 6 الى 10 خانات </div>';
-
-          }
-        }
-
-        ?>
-      </div>
 			<div class="col-8 offset-2">
 				<table class="table">
 					<thead>
 						<tr>
-						<th>الاسم </th>
-						<th>البريد الالكتروني </th>
-            
+						<th>التخصص </th>
+						<th>عدد الساعات الدراسيه </th>
 					</tr>
 					</thead>
 					<tbody>
 						<?php 
-                          $sql=$db->getUsers();
+                          $sql=$db-> getMajerstu($_GET['id_col']);
+                          $_SESSION['col']=$_GET['id_col'];
                           foreach ($sql as $key ) {
                           	echo'
                           	<tr>
-                          	<td>'.$key['name'].'</td>
-                            <td>'.$key['email'].'</td>
-                             
+                          	<td><a href=plan.php?id_mjr='.$key['id_m'].'>'.$key['majer_name'].'</a></td>
+                          	<td>'.$db->getHours($key['id_m']).'</td>
 
                           	</tr>
 
@@ -106,7 +79,7 @@ if (isset($_POST['sub'])) {
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">اضافه طالب </h5>
+        <h5 class="modal-title" id="exampleModalLabel">اضافه تخصص جديد </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -114,38 +87,10 @@ if (isset($_POST['sub'])) {
       <div class="modal-body">
         <form method="POST">
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">الاسم:</label>
-            <input type="text" class="form-control" id="recipient-name" name="name">
+            <label for="recipient-name" class="col-form-label">التخصص:</label>
+            <input type="text" class="form-control" id="recipient-name" name="majer">
           </div>
-
-           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">البريد الالكتروني  </label>
-            <input type="email" class="form-control" id="recipient-name" name="email">
-          </div>
-
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label"> كلمه المرور </label>
-            <input type="password" class="form-control" id="recipient-name" name="password">
-          </div>
-
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">تاكيد كلمه المرور </label>
-            <input type="password" class="form-control" id="recipient-name" name="password2">
-          </div>
-
           
-           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">الصلاحيه </label>
-            <select name="role">
-            	<option value="3">راصد</option>
-              <option value="5">مراجع </option>
-              <option value="4">مستعلم</option>
-             
-            </select>
-          </div>
-
-           
-
         
       </div>
       <div class="modal-footer">

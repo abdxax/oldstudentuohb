@@ -4,7 +4,7 @@ require "page/connect/func.php";
 if (isset($_POST['sub'])) {
   # code...
   $email=strip_tags($_POST['email']);
-  $pass=strip_tags($_POST['pass']);
+  $pass=md5("uhb".$_POST['pass']);
   $db=new opreter();
   $db->login($email,$pass);
 }
@@ -18,7 +18,7 @@ if (isset($_POST['sub'])) {
      <link href="https://fonts.googleapis.com/css?family=Amiri|Cairo|Changa|Markazi+Text|Noto+Sans|Open+Sans|PT+Sans|Roboto|Scheherazade|Source+Serif+Pro" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" id="style" href="css/style.css">
-     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    < <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
      <script type="text/javascript" src="js/login.js"></script>
 	<title></title>
 	
@@ -28,7 +28,7 @@ if (isset($_POST['sub'])) {
 <section>
 	<div class="row">
 		<div class="col-lg-7 col-md-6 back hidden-md-down hidden-phone">
-			
+			 
 		</div>
 
 		<div class="col-lg-5 col-md-6 vx col-sm-12" id="dire">
@@ -40,7 +40,20 @@ if (isset($_POST['sub'])) {
                <div class="card ">
                	<div class="card-body">
                		<div class="card-title"><h5 id="title">نظام السجلات الطالبات القديم </h5> </div>
-               		<div class="col-12">
+               		<div class="col-12"> 
+                    
+                      <?php
+                         if (isset($_GET['msg'])=="err") {
+                           # code...
+                          echo "
+                          <div class='alert alert-danger'>
+
+                          الرقم السري او البريد الالكتروني غير صحيح 
+                             </div>
+                          ";
+                         }
+                      ?>
+                    
                			<form method="POST">
                				<div class="form-group">
                					<div class="col-12">
@@ -75,14 +88,14 @@ if (isset($_POST['sub'])) {
 			 </div>
 
 			 <footer>
-			             <p>@copyright 2018-2019 Abdulrahman Jarallah </p>
+			            <p>@copyright 2018-2019 Abdulrahman Jarallah </p>
 
 			 </footer>
 		</div>
 	</div>
 </section>
 <!-- loading -->
-<section class="loading">
+<!--<section class="loading">
       <div class="loga">
           <img src="loading.jpg"> 
       </div>
@@ -93,7 +106,7 @@ if (isset($_POST['sub'])) {
 </div>
      
 
-</section>
+</section>-->
 
 
 <!-- loading end -->

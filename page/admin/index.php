@@ -25,11 +25,7 @@ $info=$db->getInfoEmployee($_SESSION['email']);
 <header>
 	<div class="text-center">
 		<?php 
-		foreach ($info as $key ) {
-			echo "<h4>".$key['name']."</h4>";
-			echo "<h4>".$db->getIColloge($key['id_col'])."</h4>";
-			$_SESSION['id_co']=$key['id_col'];
-		}
+		
 		?>
 	</div>
 	

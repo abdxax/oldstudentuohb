@@ -36,6 +36,12 @@ class opreter extends DB{
                     $_SESSION['roles']=$key['role'];
                     header("location:page/query/index.php");
                 }
+                else if($key['role']==5){
+                    $_SESSION['email']=$user;
+                    $_SESSION['pass']=$pass;
+                    $_SESSION['roles']=$key['role'];
+                    header("location:page/review/colloge.php");
+                }
                 else{
                     header("location:login.php?msg=err");
                 }
@@ -165,12 +171,12 @@ public function getmajer($id){
     }
 
 // add term 
-    public function addnewStudentTerm($id_tr,$id_stu,$date){
+    public function addnewStudentTerm($id_tr,$id_stu,$date,$email){
         $sqlcount=$this->pdo->prepare("SELECT * FROM  date_term");
         $sqlcount->execute();
         $countTerm=0;
-        $sql=$this->pdo->prepare("INSERT INTO date_term(id_stu,id_ter,datesum)VALUES(?,?,?)");
-        if ($sql->execute(array($id_stu,$id_tr,$date))) {
+        $sql=$this->pdo->prepare("INSERT INTO date_term(id_stu,id_ter,datesum,email_emp)VALUES(?,?,?,?)");
+        if ($sql->execute(array($id_stu,$id_tr,$date,$email))) {
              $countTerm=$this->pdo->lastInsertId();
         }
         else
@@ -346,6 +352,19 @@ WHERE college.id_col=?");
             header("location:../../login.php");
         }
 
+    }
+
+    // get hourse for majer 
+    public function getHours($id_m){
+        $sql=$this->pdo->prepare("SELECT * FROM majer LEFT JOIN subject ON majer.id_m=subject.id_maj WHERE majer.id_m=?");
+        $sql->execute(array($id_m));
+        $hor=0;
+        foreach ($sql as $key) {
+            # code...
+            $hor+=$key['hours'];
+
+        }
+        return $hor;
     }
 
 

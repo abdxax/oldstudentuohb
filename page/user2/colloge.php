@@ -29,7 +29,7 @@ if (isset($_POST['sub'])) {
 <header>
 	<div class="col-8 offset-2">
 		<div class="col-4">
-			<a href="#" class="btn btn-info " data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">اضافه تخصص </a>
+			
 			<a href="index.php" class="btn btn-info ">الصفحه الرئيسه </a>
 		</div>
 		<div class="col-4">
