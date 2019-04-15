@@ -12,7 +12,7 @@ if ($infotrn->rowCount()==1) {
 $id_gv='';
 $colle='';
 $majr='';
-$$type_cre='';
+$type_cre='';
 foreach ($infotrn as $key ) {
   # code...
   $name=$key['name'];

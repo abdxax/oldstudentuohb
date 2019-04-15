@@ -3,7 +3,14 @@ session_start();
 require "../connect/func.php";
 $db=new opreter();
 $db->checkRole($_SESSION['email'],$_SESSION['pass'],3) ;
-	# code...
+
+
+if (isset($_POST['sub'])) {
+	$name=strip_tags($_POST['majer']);
+	$idgov=strip_tags($_POST['idgov']);
+	$mjr=$_POST['mjr'];
+	$db->addStudentFromMajer($idgov,$name,$mjr);
+}
 
 
 $info=$db->getInfoEmployee($_SESSION['email']);
@@ -20,6 +27,7 @@ $info=$db->getInfoEmployee($_SESSION['email']);
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
      <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <!-- <script type="text/javascript" src="js/login.js"></script>-->
+     <script src="../../js/bootstrap.js"></script>
 	<title></title>
 
 </head>
@@ -51,7 +59,7 @@ $info=$db->getInfoEmployee($_SESSION['email']);
 				}
 
 				?>
-				<div class="col-6 offset-md-3">
+				<div class="col-6 offset-md-3" style="margin-bottom: 15px">
 					<form method="POST" action="search.php">
 						<div class="form-group">
 							<input type="text" name="ser" class="form-control" placeholder="Search ">
@@ -79,6 +87,19 @@ $info=$db->getInfoEmployee($_SESSION['email']);
 
 			
 
+
+			<div class="col-4">
+				<div class="card">
+					<a href="#" class="btn btn-info " data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">
+						<div class="text-center">
+							<i class="fas fa-user-plus"></i>
+						</div>
+						<div class="text-center">اضافة طالبة جديدة </div>
+					</a>
+				</div>
+			</div>
+
+
 			<div class="col-4">
 				<div class="card">
 					<a href="logout.php">
@@ -89,8 +110,61 @@ $info=$db->getInfoEmployee($_SESSION['email']);
 					</a>
 				</div>
 			</div>
+
+
 		</div>
 	</div>
 </section>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">اضافه طالب </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="POST">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">الاسم:</label>
+            <input type="text" class="form-control" id="recipient-name" name="majer">
+          </div>
+
+           <div class="form-group">
+            <label for="recipient-name" class="col-form-label">السجل المةني </label>
+            <input type="number" class="form-control" id="recipient-name" name="idgov">
+          </div>
+
+           <div class="form-group">
+            <label for="recipient-name" class="col-form-label">التخصص </label>
+            <select name="mjr">
+            	<?php
+                  $sql=$db->getallMajerstu();
+                  foreach ($sql as $key ) {
+                  	echo "
+                   <option value=".$key['id_m'].">".$key['majer_name']."</option>
+                  ";
+                  }
+                 
+            	?>
+            </select>
+          </div>
+
+           
+
+        
+      </div>
+      <div class="modal-footer">
+      	<input type="submit" name="sub" class="btn btn-info" value="حفظ">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+        
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>

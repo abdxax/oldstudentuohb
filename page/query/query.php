@@ -38,7 +38,7 @@ foreach ($infotrn as $key ) {
 <header>
 	<div class="col-8 offset-2">
 		<div class="col-4">
-			<a href="#" class="btn btn-info " data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">اضافه تخصص </a>
+		
 			<a href="index.php" class="btn btn-info ">الصفحه الرئيسه </a>
 		</div>
 		<div class="col-4">
@@ -78,8 +78,28 @@ foreach ($infotrn as $key ) {
 
     foreach($trm as $val){
       $sql=$db->getTranscript($id_student,$val['id_trm']);
-     foreach ($sql as $key ) {
+      if ($val%2!=0) {
+        # code...
+        echo "<div class='col-11'>
+              <div class='alert alert-default'>";
+                if ($val<2) {
+                  echo "الفرقة الاولى ";
+                }
+                else if ($val<4) {
+                   echo "الفرقة الثانية ";
+                }
+                else if ($val<6) {
+                  echo "الفرقة الثالة ";
+                }
+               else  if ($val<8) {
+                   echo "الفرقة الرابعه ";
+                }
 
+              echo "</div>
+        </div>";
+      }
+     foreach ($sql as $key ) {
+       
        # code...
        echo '
       <div class="col-6">

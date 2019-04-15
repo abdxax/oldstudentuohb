@@ -97,6 +97,27 @@ public function getmajer($id){
     }
 
     //add student 
+    public function addStudentFromMajer($id,$name,$mj){
+        $id_col=$this->getCollegeFromMajer($mj);
+        $sql=$this->pdo->prepare("INSERT INTO student(id_gov,name,id_col,id_maj)VALUES(?,?,?,?)");
+        if ($sql->execute(array($id,$name,$id_col,$mj))) {
+            # code...
+        }
+    }
+    //get college from major id 
+    public function getCollegeFromMajer($id_m){
+        $sql=$this->pdo->prepare("SELECT * FROM majer WHERE id_m=?");
+        $sql->execute(array($id_m));
+       $id_col=0;
+       foreach ($sql as $key ) {
+           # code...
+        $id_col=$key['id_col'];
+       }
+       return $id_col;
+    }
+
+    //add student from majer
+    //add student 
     public function addStudent($id,$name,$mj,$id_col){
         $sql=$this->pdo->prepare("INSERT INTO student(id_gov,name,id_col,id_maj)VALUES(?,?,?,?)");
         if ($sql->execute(array($id,$name,$id_col,$mj))) {
@@ -195,14 +216,15 @@ public function getmajer($id){
 
     //getdata transcript 
     public function getTranscript($id_gov,$id_trm){
-        $sql=$this->pdo->prepare("SELECT * FROM student JOIN mark ON student.id_gov=mark.id_gov
+        /*$sql=$this->pdo->prepare("SELECT * FROM student LEFT JOIN mark ON student.id_gov=mark.id_gov
                 JOIN college ON student.id_col=college.id_col
                 JOIN majer ON college.id_col=majer.id_col
                  JOIN subject ON mark.id_sub=subject.id_sub
                  JOIN date_term ON mark.id_da =date_term.id_det 
                  JOIN term ON date_term.id_ter=term.id_trm
                  WHERE student.id_gov=? AND majer.id_m=student.id_maj AND subject.id_trm=?;
-            ");
+            ");*/
+          //  $sql="SELECT * FROM student"
         $sql->execute(array($id_gov,$id_trm));
         return $sql;
     }
@@ -366,6 +388,11 @@ WHERE college.id_col=?");
         }
         return $hor;
     }
-
+// get all major 
+    public function getallMajerstu(){
+        $sql=$this->pdo->prepare("SELECT * FROM majer");
+        $sql->execute();
+        return $sql;
+    }
 
 }
