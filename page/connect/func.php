@@ -96,6 +96,7 @@ public function getmajer($id){
         return $sql;
     }
 
+
     //add student 
     public function addStudentFromMajer($id,$name,$mj){
         $id_col=$this->getCollegeFromMajer($mj);
@@ -224,7 +225,12 @@ public function getmajer($id){
                  JOIN term ON date_term.id_ter=term.id_trm
                  WHERE student.id_gov=? AND majer.id_m=student.id_maj AND subject.id_trm=?;
             ");*/
-          //  $sql="SELECT * FROM student"
+           $sql="SELECT * FROM student LEFT JOIN college ON student.id_col=college.id_col 
+                   LEFT JOIN majer ON student.id_maj=majer.id_m
+                    LEFT JOIN subject  ON subject.id_maj=majer.id_m
+                    LEFT JOIN date_term ON date_term.id_stu=student.id_gov
+                    LEFT JOIN mark ON mark.id_da=date_term.id_det
+                    WHERE student.id_gov=?";
         $sql->execute(array($id_gov,$id_trm));
         return $sql;
     }
@@ -394,5 +400,13 @@ WHERE college.id_col=?");
         $sql->execute();
         return $sql;
     }
+    // get How Many Student has 
+    public function getTermStuent($id_s){
+        $sql=$this->pdo->prepare("SELECT * FROM date_term WHERE id_stu=?");
+        $sql->execute(array($id_s));
+        $rows=$sql->rowCount();
+        return $rows;
+    }
+    
 
 }
